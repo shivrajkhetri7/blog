@@ -1,0 +1,36 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "\"this is backend for blog application\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "none",
+    "start:dev" : "nodemon index.js",
+    "start":"node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivrajkhetri7/blog.git"
+  },
+  "keywords": [
+    "\"BLOG",
+    "BLOGS",
+    "BLOG_APPLICATION",
+    "SAMPLE",
+    "BLOG",
+    "APPLICATION\""
+  ],
+  "author": "shivraj khetri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shivrajkhetri7/blog/issues"
+  },
+  "homepage": "https://github.com/shivrajkhetri7/blog#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.1",
+    "nodemon": "^3.1.7"
+  }
+}
