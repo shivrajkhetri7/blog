@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "\"this is backend for blog application\"",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "test": "none",
     "start:dev": "nodemon index.js",
@@ -33,6 +34,12 @@
     "express": "^4.21.1",
     "mongoose": "^8.9.2",
     "mongose": "^0.0.2-security",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "gridfs-stream": "^1.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.4",
+    "multer-gridfs-storage": "^5.0.2"
   }
 }

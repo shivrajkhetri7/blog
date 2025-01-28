@@ -1,32 +1,34 @@
-const express = require('express');
-const dotenv = require('dotenv').config();
-const CryptoJS = require('crypto-js'); // Ensure correct capitalization
+const express = require("express");
+
+const { createPost, updatePost, deletePost, getPost, getAllPosts } = require("../controllers/post-controller.js");
+const { uploadImage, getImage } = require("../controllers/image-controller.js");
+const { newComment, getComments, deleteComment } = require('../controllers/comment-controller.js');
+const { loginUser, singupUser, logoutUser } = require('../controllers/user-controller.js');
+const { authenticateToken, createNewToken } = require('../controllers/jwt-controller.js');
+
+const { upload } = require('../utils/upload.js'); 
 
 const router = express.Router();
 
-// Example route
-router.get('/app', (req, res) => {
-    res.send('Welcome to the router!');
-});
+router.post('/login', loginUser);
+router.post('/signup', singupUser);
+router.post('/logout', logoutUser);
 
-// User login route
-router.post('/login', async (req, res) => {
-    try {
-        const { userName, password } = req.body;
+router.post('/token', createNewToken);
 
-        // Example: Encrypted password and decryption key
-        const secretKey = process.env.SECREAT_PASS;
-        const decryptedPassword = CryptoJS.AES.decrypt(password, secretKey).toString(CryptoJS.enc.Utf8);
+router.post('/create', authenticateToken, createPost);
+router.put('/update/:id', authenticateToken, updatePost);
+router.delete('/delete/:id', authenticateToken, deletePost);
 
-        // Check user credentials (mock implementation)
-        if (userName === "admin" && decryptedPassword === "admin123") {
-            res.status(200).json({ message: "Login successful!" });
-        } else {
-            res.status(401).json({ message: "Invalid credentials!" });
-        }
-    } catch (error) {
-        res.status(500).json({ message: "Server error!" });
-    }
-});
+router.get('/post/:id', authenticateToken, getPost);
+router.get('/posts', authenticateToken, getAllPosts);
+
+// router.post('/file/upload', upload.single('file'), uploadImage);
+router.get('/file/:filename', getImage);
+
+router.post('/comment/new', authenticateToken, newComment);
+router.get('/comments/:id', authenticateToken, getComments);
+router.delete('/comment/delete/:id', authenticateToken, deleteComment);
+
 
 module.exports = router;

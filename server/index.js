@@ -1,18 +1,23 @@
 const express = require('express');
 const dotenv = require('dotenv').config();
 const bodyParser = require('body-parser');
-const PORT = process.env.PORT || 8000;
-const router = require('./routes/indexRoute');
-const connectToDatabase= require('./db/dbConfig');
+const router = require('./routes/indexRoute.js');
+const connectToDatabase = require('./db/dbConfig');
 
 const app = express();
 
+// Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/', router);
 
+// Routes
+app.use('/', router);  // Make sure the router is correct
+
+// Database connection
 connectToDatabase();
 
-app.listen(PORT,()=>{
-    console.log(`server running on http://localhost:${PORT}`);
-})
+// Start the server
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
